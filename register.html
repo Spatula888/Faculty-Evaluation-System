@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register | CCDI Faculty Evaluation System</title>
+    <link rel="icon" type="image/png" href="{% static 'eval/ccdi.png' %}">
+    <link href="{% static 'eval/sty.css' %}" rel="stylesheet">
+    <link href="{% static 'eval/css.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand text-light" href="">
+                    <img src="{% static 'eval/ccdi.png' %}" alt="" width="32px" height="32px">
+                    CCDI Faculty Evaluation System
+                </a>
+            </div>
+        </nav>
+
+        <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 pt-5">
+                        <div class="card">
+                            <div class="card-header myheader-admin text-light">Register</div>
+                            <div class="card-body">
+                                <form method="POST" action="{% url 'register' %}">
+                                    {% csrf_token %}
+                                    
+                                    <div class="form-group row">
+                                        <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
+                                        <div class="col-md-6">
+                                            <select id="role" name="role" class="form-control custom-dropdown" required>
+                                                <option value="" disabled selected>Select Role</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="student">Student</option>
+                                                <option value="faculty">Faculty</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control" name="password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password_confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                        <div class="col-md-6">
+                                            <input id="password_confirm" type="password" class="form-control" name="password_confirm" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-design text-light">
+                                                Register
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="text-center mt-3">
+                                    <p>Already have an account? <a href="{% url 'login' %}" class="text-primary">Login here</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

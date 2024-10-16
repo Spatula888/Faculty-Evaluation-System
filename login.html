@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if page_title %}
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token }}">
+        <title>{{ page_title }} | CCDI Faculty Evaluation System </title>
+    {% else %}
+        <title>CCDI Faculty Evaluation System</title>
+    {% endif %}
+
+    <link rel="icon" type="image/png" href="{% static 'eval/ccdi.png' %}">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{% static 'eval/sty.css' %}" rel="stylesheet">
+    <link href="{% static 'eval/css.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand text-light" href="">
+                    <img src="{% static 'eval/ccdi.png' %}" alt="" width="32px" height="32px">
+                    CCDI Faculty Evaluation System
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 pt-5">
+                        <div class="card">
+                            <div class="card-header myheader-admin text-light">Login</div>
+
+                            <div class="card-body">
+                                <form method="POST" action="{% url 'login' %}" aria-label="Login">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="_token" value="Tx8UmCkJxQmzrvYlok4Edi1RBJ3RkbDBrBWOsaBx">
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <select id="role" name="role" class="form-control custom-dropdown" required>
+                                                <option value="" disabled selected>Login As</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="student">Student</option>
+                                                <option value="faculty">Faculty</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password" class="form-control" name="password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6 offset-md-4">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="remember"> Remember Me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-design text-light">
+                                                Login
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- Registration Link -->
+                                <div class="text-center mt-3">
+                                    <p>Don't have an account? <a href="{% url 'register' %}" class="text-primary">Register here</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://faculty-evaluation.CCDI.edu.ph/js/jquery.min.js"></script>
+    <script src="https://faculty-evaluation.CCDI.edu.ph/js/bootstrap.min.js"></script>
+</body>
+</html>
