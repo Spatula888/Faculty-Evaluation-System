@@ -12,31 +12,32 @@ def login_view(request):
         role = request.POST.get('role')
         password = request.POST.get('password')
 
-        # Define role-based usernames
+        # Dictionary mapping roles to usernames
         role_based_usernames = {
-            'admin': 'admin_username',  # Replace with actual admin username
-            'student': 'student_username',  # Replace with actual student username
-            'faculty': 'faculty_username',  # Replace with actual faculty username
+            'admin': 'admin_username',
+            'student': 'student_username',
+            'faculty': 'faculty_username',
         }
 
         # Get the username based on the selected role
         username = role_based_usernames.get(role)
 
-        if username:  # Check if the role is valid
+        if username:
+            # Authenticate the user with the role-based username
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 # Redirect based on role
                 if role == 'admin':
-                    return redirect('admin_dashboard')
+                    return redirect('home')
                 elif role == 'student':
                     return redirect('student_dashboard')
                 elif role == 'faculty':
                     return redirect('faculty_dashboard')
             else:
-                return render(request, 'home.html', {'error': 'Invalid credentials.'})
+                messages.error(request, 'Invalid credentials.')
         else:
-            return render(request, 'home.html', {'error': 'Invalid role selected.'})
+            messages.error(request, 'Invalid role selected.')
 
     return render(request, 'login.html')
 
@@ -66,18 +67,32 @@ def register_view(request):
         # Get the username based on the selected role
         username = role_based_usernames.get(role)
 
+       def register_view(request):
+    if request.method == 'POST':
+        role = request.POST.get('role')  # Get role from form
+        password = request.POST['password']
+        password_confirm = request.POST['password_confirm']
+
+        # Dictionary to map roles to default usernames
+        role_based_usernames = {
+            'admin': 'admin_username',
+            'student': 'student_username',
+            'faculty': 'faculty_username',
+        }
+
+        # Generate username based on role
+        username = role_based_usernames.get(role)
+
         if username and password == password_confirm:
             try:
+                # Create a user with role as the username
                 user = User.objects.create_user(username=username, password=password)
                 user.save()
                 messages.success(request, 'Registration successful. You can now log in.')
-                return redirect('login')  # Redirect to the login page after successful registration
+                return redirect('login')
             except Exception as e:
                 messages.error(request, f'Error: {str(e)}')
         else:
-            if not username:
-                messages.error(request, 'Invalid role selected.')
-            else:
-                messages.error(request, 'Passwords do not match.')
+            messages.error(request, 'Passwords do not match or invalid role selected.')
 
     return render(request, 'register.html')
