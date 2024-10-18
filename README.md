@@ -7,3 +7,5 @@ Register
 Admin Dashboard
 ![image](https://github.com/user-attachments/assets/4928a506-6582-4e3e-9321-61294b452eca)
 
+update register 
+![image](https://github.com/user-attachments/assets/16c04fbb-21d2-4a69-a72d-4e808222963a)
