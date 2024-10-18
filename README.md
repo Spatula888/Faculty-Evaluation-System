@@ -1,5 +1,5 @@
 # Faculty-Evaluation-System
-unfinish, many to fix
+ill be posting here my progession
 login
 ![image](https://github.com/user-attachments/assets/6bc4d062-bbc2-4e49-9a0b-3eb5a9281d51)
 Register
